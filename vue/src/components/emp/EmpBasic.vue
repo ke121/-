@@ -1,10 +1,10 @@
 <template>
-  <div><h1>{{this.$router.currentRoute.name}}</h1></div>
+    <h1>基本资料</h1>
 </template>
 
 <script>
     export default {
-        name: "SalaryInfo"
+        name: "EmpBasic"
     }
 </script>
 

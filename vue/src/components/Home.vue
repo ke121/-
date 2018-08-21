@@ -24,26 +24,23 @@
         <el-menu
           @select="handleSelect"
           class="el-menu-vertical-demo">
-          <el-submenu index="1">
+          <el-submenu :index="index.toString()" v-for="(route,index) in this.routes" :key="index"  v-if="route.hidden!=true">
             <template slot="title">
               <i class="el-icon-location"></i>
-              <span>员工管理</span>
+              <span>{{route.name}}</span>
             </template>
-            <el-menu-item index="/basic">员工基本信息</el-menu-item>
-            <el-menu-item index="/salary">员工工资</el-menu-item>
-          </el-submenu>
-          <el-submenu index="2">
-            <template slot="title">
-              <i class="el-icon-location"></i>
-              <span>系统管理</span>
-            </template>
-            <el-menu-item index="/role">角色管理</el-menu-item>
-            <el-menu-item index="/user">用户管理</el-menu-item>
+            <el-menu-item :index="child.path" v-for="(child,index2) in  route.children" :key="index2">{{child.name}}</el-menu-item>
           </el-submenu>
         </el-menu>
-
       </el-aside>
       <el-main>
+        <el-breadcrumb separator-class="el-icon-arrow-right" v-if="this.$router.currentRoute.name!='Home'">
+          <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
+          <el-breadcrumb-item>{{this.$router.currentRoute.name}}</el-breadcrumb-item>
+        </el-breadcrumb>
+        <div v-if="this.$router.currentRoute.path == '/home'" style="display: flex;justify-content: center;margin-top: 150px;font-size: 40px;font-family: '微软雅黑 Light'">
+          欢迎来到百威美食尚餐饮管理系统
+        </div>
         <router-view></router-view>
       </el-main>
     </el-container>
@@ -58,7 +55,13 @@
         return {
           user:JSON.parse(window.localStorage.getItem("user"))
         }
-      },methods: {
+      },
+      computed:{
+        routes(){
+          return this.$store.state.routes ;
+        }
+      }
+      ,methods: {
         handleCommand(command) {
           if(command == 'logout'){
             this.$confirm('此操作将注销用户, 是否继续?', '注销', {

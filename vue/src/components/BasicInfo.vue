@@ -1,5 +1,5 @@
 <template>
-  <div><h1>basicinfo</h1></div>
+  <div><h1>{{this.$router.currentRoute.name}}</h1></div>
 </template>
 
 <script>

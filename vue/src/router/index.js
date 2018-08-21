@@ -21,40 +21,11 @@ export default new Router({
       path: '/hello',
       name: 'Hello',
       component: Hello,
+      hidden:true
     },{
       path: '/home',
       name: 'Home',
-      component: Home
-    }, {
-      path: '/home',
-      name: '员工管理',
       component: Home,
-      children:[
-        {
-          path: '/basic',
-          name: '基本信息',
-          component: BasicInfo
-        },{
-          path: '/salary',
-          name: '员工工资',
-          component: SalaryInfo
-        }
-      ]
-    },{
-      path: '/home',
-      name: '员工管理',
-      component: Home,
-      children:[
-        {
-          path: '/role',
-          name: '角色管理',
-          component: RoleInfo
-        },{
-          path: '/user',
-          name: '用户管理',
-          component: UserInfo
-        }
-      ]
-    }
-  ]
+      hidden:true
+    } ]
 })

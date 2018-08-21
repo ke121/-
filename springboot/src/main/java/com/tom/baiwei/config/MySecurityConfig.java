@@ -7,6 +7,7 @@ import com.tom.baiwei.service.HrService;
 import com.tom.baiwei.utils.HrUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -14,6 +15,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import javax.servlet.ServletException;
@@ -24,6 +26,12 @@ import java.io.PrintWriter;
 
 @Configuration
 public class MySecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    CustomAccessDecisionManager accessDecisionManager ;
+
+    @Autowired
+    CustomFilterInvocationSecurityMetadataSource metadataSource ;
 
     @Autowired
     HrService hrService ;
@@ -39,7 +47,16 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().anyRequest().authenticated()
+        http.authorizeRequests()//anyRequest().authenticated().antMatchers().hasAnyRole()
+                .withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
+
+                    @Override
+                    public <O extends FilterSecurityInterceptor> O postProcess(O o) {
+                        o.setAccessDecisionManager(accessDecisionManager);
+                        o.setSecurityMetadataSource(metadataSource);
+                        return o;
+                    }
+                })
                 .and().formLogin().loginProcessingUrl("/login")
                 .successHandler(new AuthenticationSuccessHandler() {
                     @Override
