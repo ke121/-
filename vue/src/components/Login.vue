@@ -46,7 +46,12 @@
                 if(resp.data.status == 200){
                   console.log(resp) ;
                   window.localStorage.setItem("user",JSON.stringify(resp.data.obj)) ;
-                  this.$router.replace("/home") ;
+                  var hh = this.$route.query.hh
+                  if(hh){
+                    this.$router.replace(hh) ;
+                  }else{
+                    this.$router.replace('/home') ;
+                  }
                 }
               })
           }

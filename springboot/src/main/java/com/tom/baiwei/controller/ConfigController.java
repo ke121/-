@@ -26,8 +26,7 @@ public class ConfigController {
     MenuService menuService ;
     @GetMapping("/config/menus")
     public  List<Menu> getMenus(){
-        System.out.println(menuService.getMenusByHrId(HrUtils.getCurrentUser().getId())) ;
-        return  menuService.getMenusByHrId(HrUtils.getCurrentUser().getId()) ;
+        return  menuService.getMenusByHrId() ;
     }
 
     @GetMapping("/menus")

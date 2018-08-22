@@ -16,10 +16,6 @@ public class Menu implements Serializable {
 
     private String iconCls;
 
-    private Boolean keepAlive;
-
-    private Boolean requireAuth;
-
     private Integer parentId;
 
     private Boolean enabled;
@@ -57,18 +53,7 @@ public class Menu implements Serializable {
     public Menu() {
     }
 
-    public Menu(Integer id, String url, String path, String component, String name, String iconCls, Boolean keepAlive, Boolean requiReauth, Integer parentId, Boolean enabled) {
-        this.id = id;
-        this.url = url;
-        this.path = path;
-        this.component = component;
-        this.name = name;
-        this.iconCls = iconCls;
-        this.keepAlive = keepAlive;
-        this.requireAuth = requiReauth;
-        this.parentId = parentId;
-        this.enabled = enabled;
-    }
+
 
     public Integer getId() {
         return id;
@@ -118,22 +103,6 @@ public class Menu implements Serializable {
         this.iconCls = iconCls;
     }
 
-    public Boolean getKeepAlive() {
-        return keepAlive;
-    }
-
-    public void setKeepAlive(Boolean keepAlive) {
-        this.keepAlive = keepAlive;
-    }
-
-    public Boolean getRequireAuth() {
-        return requireAuth;
-    }
-
-    public void setRequireAuth(Boolean requireAuth) {
-        this.requireAuth = requireAuth;
-    }
-
     public Integer getParentId() {
         return parentId;
     }
@@ -159,12 +128,25 @@ public class Menu implements Serializable {
                 ", component='" + component + '\'' +
                 ", name='" + name + '\'' +
                 ", iconCls='" + iconCls + '\'' +
-                ", keepAlive=" + keepAlive +
-                ", requireAuth=" + requireAuth +
                 ", parentId=" + parentId +
                 ", enabled=" + enabled +
                 ", children=" + children +
                 ", roles=" + roles +
+                ", meta=" + meta +
                 '}';
+    }
+
+    public Menu(Integer id, String url, String path, String component, String name, String iconCls, Integer parentId, Boolean enabled, List<Menu> children, List<Role> roles, Meta meta) {
+        this.id = id;
+        this.url = url;
+        this.path = path;
+        this.component = component;
+        this.name = name;
+        this.iconCls = iconCls;
+        this.parentId = parentId;
+        this.enabled = enabled;
+        this.children = children;
+        this.roles = roles;
+        this.meta = meta;
     }
 }

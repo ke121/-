@@ -26,7 +26,7 @@
           class="el-menu-vertical-demo">
           <el-submenu :index="index.toString()" v-for="(route,index) in this.routes" :key="index"  v-if="route.hidden!=true">
             <template slot="title">
-              <i class="el-icon-location"></i>
+              <i :class=route.iconCls></i>
               <span>{{route.name}}</span>
             </template>
             <el-menu-item :index="child.path" v-for="(child,index2) in  route.children" :key="index2">{{child.name}}</el-menu-item>
