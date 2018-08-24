@@ -14,6 +14,7 @@ import {deleteRequest} from './utils/api';
 import {getRequest} from './utils/api';
 import {uploadFileRequest} from './utils/api';
 import {initMenu} from "./utils/utils";
+import   './utils/filter_utils'
 
 Vue.config.productionTip = false
 

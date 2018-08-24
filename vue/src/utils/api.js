@@ -13,6 +13,9 @@ axios.interceptors.response.use(data=> {
     Message.error({message: data.data.msg});
     return;
   }
+  if( data.data.msg){
+    Message.success({message: data.data.msg});
+  }
   return data;
 }, err=> {
   if (err.response.status == 504||err.response.status == 404) {

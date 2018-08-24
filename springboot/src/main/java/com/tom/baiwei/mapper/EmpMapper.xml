@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tom.baiwei.mapper.EmpMapper">
+    <resultMap id="BaseResultMap" type="com.tom.baiwei.model.Employee" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="gender" property="gender" jdbcType="CHAR" />
+        <result column="birthday" property="birthday" jdbcType="DATE" />
+        <result column="idCard" property="idcard" jdbcType="CHAR" />
+        <result column="wedlock" property="wedlock" jdbcType="CHAR" />
+        <result column="nationId" property="nationid" jdbcType="INTEGER" />
+        <result column="nativePlace" property="nativeplace" jdbcType="VARCHAR" />
+        <result column="politicId" property="politicid" jdbcType="INTEGER" />
+        <result column="email" property="email" jdbcType="VARCHAR" />
+        <result column="phone" property="phone" jdbcType="VARCHAR" />
+        <result column="address" property="address" jdbcType="VARCHAR" />
+        <result column="departmentId" property="departmentid" jdbcType="INTEGER" />
+        <result column="jobLevelId" property="joblevelid" jdbcType="INTEGER" />
+        <result column="posId" property="posid" jdbcType="INTEGER" />
+        <result column="engageForm" property="engageform" jdbcType="VARCHAR" />
+        <result column="tiptopDegree" property="tiptopdegree" jdbcType="CHAR" />
+        <result column="specialty" property="specialty" jdbcType="VARCHAR" />
+        <result column="school" property="school" jdbcType="VARCHAR" />
+        <result column="beginDate" property="begindate" jdbcType="DATE" />
+        <result column="workState" property="workstate" jdbcType="CHAR" />
+        <result column="workID" property="workid" jdbcType="CHAR" />
+        <result column="contractTerm" property="contractterm" jdbcType="DOUBLE" />
+        <result column="conversionTime" property="conversiontime" jdbcType="DATE" />
+        <result column="notWorkDate" property="notworkdate" jdbcType="DATE" />
+        <result column="beginContract" property="begincontract" jdbcType="DATE" />
+        <result column="endContract" property="endcontract" jdbcType="DATE" />
+        <result column="workAge" property="workage" jdbcType="INTEGER" />
+        <association property="department" javaType="com.tom.baiwei.model.Department">
+            <result  property="name" column="dname" jdbcType="VARCHAR"></result>
+        </association>
+        <association property="nation" javaType="com.tom.baiwei.model.Nation">
+            <result  property="name" column="nname" jdbcType="VARCHAR"></result>
+        </association>
+        <association property="politicsStatus" javaType="com.tom.baiwei.model.PoliticsStatus">
+            <result  property="name" column="psname"  jdbcType="VARCHAR"></result>
+        </association>
+        <association property="position" javaType="com.tom.baiwei.model.Position">
+            <result  property="name" column="pname"></result>
+        </association>
+        <association property="jobLevel" javaType="com.tom.baiwei.model.JobLevel">
+            <result  property="name" column="jname"></result>
+        </association>
+    </resultMap>
+    <sql id="Base_Column_List" >
+    e.id, e.name, e.gender, birthday, idCard, wedlock, nationId, nativePlace, politicId, email,
+    phone, address, departmentId, jobLevelId, posId, engageForm, tiptopDegree, specialty,
+    school, beginDate, workState, workID, contractTerm, conversionTime, notWorkDate,
+    beginContract, endContract, workAge
+  </sql>
+    <resultMap id="getemp" type="com.tom.baiwei.model.Employee" extends="BaseResultMap">
+        <association property="department" javaType="com.tom.baiwei.model.Department">
+            <result  property="name" column="dname" jdbcType="VARCHAR"></result>
+        </association>
+        <association property="nation" javaType="com.tom.baiwei.model.Nation">
+            <result  property="name" column="nname" jdbcType="VARCHAR"></result>
+        </association>
+        <association property="politicsStatus" javaType="com.tom.baiwei.model.PoliticsStatus">
+            <result  property="name" column="psname"  jdbcType="VARCHAR"></result>
+        </association>
+        <association property="position" javaType="com.tom.baiwei.model.Position">
+            <result  property="name" column="pname"></result>
+        </association>
+        <association property="jobLevel" javaType="com.tom.baiwei.model.JobLevel">
+            <result  property="name" column="jname"></result>
+        </association>
+    </resultMap>
+    <select id="getEmpPageByKeywords" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />,
+        n.`name` nname,
+        d.`name` dname,
+        ps.`name` psname,
+        p.`name` pname,
+        j.`name` jname
+        FROM
+        employee e,
+        department d,
+        nation n,
+        politicsstatus ps,
+        position p,
+        joblevel j
+        WHERE
+        e.nationId = n.id
+        and e.departmentId = d.id
+        and e.politicid = ps.id
+        and e.jobLevelId = j.id
+        and e.posId = p.id
+        and e.`name` like '%' #{keywords} '%'
+        order by id
+        <if test="start != null and pageSize != null">
+            limit #{start},#{pageSize}
+        </if>
+
+    </select>
+    <delete id="deleteEmpByIds">
+        delete from employee where id in
+        <foreach collection="ids" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

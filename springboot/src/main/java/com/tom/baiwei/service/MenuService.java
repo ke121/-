@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@CacheConfig(cacheNames = "c1")
+//@CacheConfig(cacheNames = "c1")
 
 @Service
 public class MenuService {
@@ -20,10 +20,11 @@ public class MenuService {
         return mapper.getMenusByHrId(HrUtils.getCurrentUser().getId()) ;
     }
 
-    @Cacheable(key = "#root.method.name")
+
+//    @Cacheable(key = "#root.method.name")
     public List<Menu> getAllMenus() {
        return mapper.getAllMenus() ;
     }
 
-    ;
+
 }

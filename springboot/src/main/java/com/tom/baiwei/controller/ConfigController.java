@@ -33,16 +33,5 @@ public class ConfigController {
     public  List<Menu> getMenusAndRoles(){
         return  menuService.getAllMenus();
     }
-    @GetMapping("/employee/basic/hello1")
-    public  String hello1(){
-        return "/employee/basic/hello1" ;
-    }
-    @GetMapping("/employee/basic/hello2")
-    public  String hello2(){
-        return "/employee/basic/hello2" ;
-    }
-    @GetMapping("/employee/advanced/hello")
-    public  String hello3(){
-        return "/employee/advanced/hello" ;
-    }
+
 }
