@@ -1,5 +1,8 @@
 package com.tom.baiwei.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Department {
     private Integer id;
 
@@ -12,6 +15,26 @@ public class Department {
     private Boolean enabled;
 
     private Boolean isparent;
+
+    private Integer result ;
+
+    public Integer getResult() {
+        return result;
+    }
+
+    public void setResult(Integer result) {
+        this.result = result;
+    }
+
+    private List<Department> children = new ArrayList<>();
+
+    public List<Department> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<Department> children) {
+        this.children = children;
+    }
 
     public Integer getId() {
         return id;

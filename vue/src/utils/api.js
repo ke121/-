@@ -89,3 +89,13 @@ export const getRequest = (url) => {
     url: `${base}${url}`
   });
 }
+  export const postBodyRequest = (url, params) => {
+    return axios({
+      method: 'post',
+      data:params ,
+      url: `${base}${url}` ,
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      }
+    });
+}

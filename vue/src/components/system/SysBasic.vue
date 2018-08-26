@@ -5,10 +5,10 @@
             <DeptMana></DeptMana>
           </el-tab-pane>
           <el-tab-pane label="职称管理" name="second">
-            <PositionMana></PositionMana>
+            <JobLevelMana></JobLevelMana>
           </el-tab-pane>
           <el-tab-pane label="职位管理" name="third">
-            <JobLevelMana></JobLevelMana>
+            <PositionMana></PositionMana>
           </el-tab-pane>
           <el-tab-pane label="奖惩规则" name="fourth">
             <ec></ec>
@@ -35,7 +35,7 @@
     },
     data() {
       return {
-        activeName: 'second'
+        activeName: 'first'
       };
     },
     methods: {

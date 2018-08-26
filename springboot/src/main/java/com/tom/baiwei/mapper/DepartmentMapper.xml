@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tom.baiwei.mapper.DepartmentMapper">
+    <resultMap id="BaseResultMap" type="com.tom.baiwei.model.Department" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="parentId" property="parentid" jdbcType="INTEGER" />
+        <result column="depPath" property="deppath" jdbcType="VARCHAR" />
+        <result column="enabled" property="enabled" jdbcType="BIT" />
+        <result column="isParent" property="isparent" jdbcType="BIT" />
+    </resultMap>
+    <resultMap id="BaseResultMap1" type="com.tom.baiwei.model.Department" extends="BaseResultMap">
+        <collection property="children" ofType="com.tom.baiwei.model.Department" select="com.tom.baiwei.mapper.DepartmentMapper.getAllDeps" column="id">
+        </collection>
+    </resultMap>
+    <select id="getAllDeps" resultMap="BaseResultMap1">
+        select * from department where parentid = #{id}
+    </select>
+
+    <select id="getAllDepsNoTree" resultMap="BaseResultMap">
+        select *from department
+    </select>
+
+    <select id="addDep" parameterType="com.tom.baiwei.model.Department" statementType="CALLABLE">
+        call addDep (#{name,mode=IN,jdbcType=VARCHAR},#{parentid ,mode=IN,jdbcType=INTEGER},#{enabled,mode=IN,jdbcType=BOOLEAN},#{result,mode=OUT,jdbcType=INTEGER},#{id,mode=OUT,jdbcType=INTEGER})
+    </select>
+    <select id="del" parameterType="com.tom.baiwei.model.Department" statementType="CALLABLE">
+        call deleteDep(#{id,mode=IN,jdbcType=INTEGER},#{result,mode=OUT,jdbcType=INTEGER})
+    </select>
+</mapper>
