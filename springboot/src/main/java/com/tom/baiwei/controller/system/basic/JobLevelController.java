@@ -1,4 +1,4 @@
-package com.tom.baiwei.controller;
+package com.tom.baiwei.controller.system.basic;
 
 import com.tom.baiwei.model.JobLevel;
 import com.tom.baiwei.model.RespBean;
@@ -18,7 +18,6 @@ public class JobLevelController {
     JobLevelService jobLevelService ;
     @GetMapping("/")
     public List<JobLevel> getAllJobLevels(){
-        System.out.println("===========================");
         return jobLevelService.getAllJobLevels() ;
     }
 

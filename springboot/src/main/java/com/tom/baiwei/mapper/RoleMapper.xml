@@ -4,4 +4,19 @@
     <select id="getRolesByHrId" resultType="com.tom.baiwei.model.Role">
         select * from role r,hr_role hr where r.id = hr.rid and hr.hrid = #{hrid}
     </select>
+    <select id="getAllRoles" resultType="com.tom.baiwei.model.Role">
+        select *from role where id != 6 ;
+    </select>
+    <insert id="addRole" parameterType="com.tom.baiwei.model.Role">
+        INSERT into role(name,nameZh) VALUES(#{name},#{nameZh})
+    </insert>
+    <delete id="deleteRolesById">
+        delete from hr_role where hrid = #{id} ;
+    </delete>
+    <insert id="insertRoles">
+        insert into hr_role(hrid,rid) values
+        <foreach collection="rolesId" item="rid" separator=",">
+            (#{id},#{rid})
+        </foreach>
+    </insert>
 </mapper>

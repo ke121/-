@@ -151,8 +151,8 @@
             <span class="custom-tree-node" style="flex: 1; display: flex; align-items: center;justify-content: space-between; font-size: 14px;  padding-right: 900px;">
             <span>{node.label}</span>
           <span>
-          <el-button size="mini"  style="margin: 0px;padding:2px" type="primary" on-click={ () => this.showAddTree(data,event) }>添加部门</el-button>
-          <el-button size="mini" style="margin: 0px;padding:2px" type="danger" on-click={ () => this.deleDep(data, event) }>删除部门</el-button>
+          <el-button size="mini"  style="margin: 0px;padding:2px" type="primary" on-click={ () => this.showAddTree(data,window.event) }>添加部门</el-button>
+          <el-button size="mini" style="margin: 0px;padding:2px" type="danger" on-click={ () => this.deleDep(data, window.event) }>删除部门</el-button>
           </span>
           </span>);
         }

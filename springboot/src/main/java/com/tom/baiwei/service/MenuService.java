@@ -27,4 +27,11 @@ public class MenuService {
     }
 
 
+    public List<Menu> getMenuTree() {
+        return mapper.getMenuTree() ;
+    }
+
+    public List<Integer> getMenusChecked(Integer rid) {
+        return mapper.getMenusChecked(rid) ;
+    }
 }

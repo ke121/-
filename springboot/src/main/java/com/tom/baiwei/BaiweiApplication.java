@@ -12,6 +12,9 @@ import org.springframework.cache.annotation.EnableCaching;
 public class BaiweiApplication {
 
     public static void main(String[] args) {
+
         SpringApplication.run(BaiweiApplication.class, args);
     }
+
+
 }

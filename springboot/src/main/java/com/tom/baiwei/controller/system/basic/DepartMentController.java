@@ -1,4 +1,4 @@
-package com.tom.baiwei.controller;
+package com.tom.baiwei.controller.system.basic;
 
 import com.tom.baiwei.model.Department;
 import com.tom.baiwei.model.RespBean;

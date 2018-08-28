@@ -32,4 +32,12 @@ public class HrService implements UserDetailsService {
         hr.setRoles(roles);
         return hr ;
     }
+
+    public List<Hr> getAllHr() {
+        return mapper.getAllHr() ;
+    }
+
+    public int updateEnabled(Hr hr) {
+        return mapper.updateEnabled(hr) ;
+    }
 }

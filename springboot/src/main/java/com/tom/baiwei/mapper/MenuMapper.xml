@@ -28,6 +28,10 @@
                 <result column="keepAlive2" property="keepAlive" jdbcType="BIT"/>
                 <result column="requireAuth2" property="requireAuth" jdbcType="BIT"/>
             </association>
+            <collection property="children" ofType="com.tom.baiwei.model.Menu">
+                <id column="id3" property="id"/>
+                <result column="name3" property="name"/>
+            </collection>
         </collection>
     </resultMap>
     <select id="getMenusByHrId" resultMap="MenuAndChildren">
@@ -40,6 +44,11 @@
             <result column="rnameZh" property="nameZh" jdbcType="VARCHAR" />
         </collection>
     </resultMap>
+
+    <select id="getMenuTree" resultMap="MenuAndChildren">
+        SELECT m1.`name`,m1.`id`,m2.`name` AS name2,m2.`id` AS id2,m3.`name` AS name3,m3.`id` AS id3 FROM menu m1 LEFT JOIN menu m2 ON m1.`id`=m2.`parentId` LEFT JOIN menu m3 ON m2.`id`=m3.`parentId` WHERE m1.`id`=1
+    </select>
+
     <select id="getAllMenus" resultMap="MenuAndRoles">
         SELECT
 	  m.*,r.id as rid,r.`name` as rname,r.nameZh as rnameZh
@@ -48,5 +57,8 @@
 LEFT JOIN menu_role mr
  ON m.id = mr.mid
 LEFT JOIN role r on r.id = mr.rid
+    </select>
+    <select id="getMenusChecked" resultType="java.lang.Integer">
+       select DISTINCT mr.mid from menu_role mr where mr.rid=#{rid}
     </select>
 </mapper>

@@ -106,9 +106,8 @@ public class Hr implements Serializable,UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return this.enabled;
     }
-
 
     public void setUsername(String username) {
         this.username = username == null ? null : username.trim();

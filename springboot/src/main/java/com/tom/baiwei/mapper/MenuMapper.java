@@ -8,4 +8,8 @@ public interface MenuMapper {
     List<Menu> getMenusByHrId(Integer id);
 
     List<Menu> getAllMenus();
+
+    List<Menu> getMenuTree();
+
+    List<Integer> getMenusChecked(Integer rid);
 }
